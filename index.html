@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Didi! ⚡💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background: #090014;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.25) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(255, 0, 127, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(138, 43, 226, 0.35) 0px, transparent 50%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Cyber Grid Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Neon Glow Orbs */
+        .neon-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+        }
+
+        .orb-1 { width: 350px; height: 350px; background: #00f0ff; top: -100px; left: -50px; }
+        .orb-2 { width: 400px; height: 400px; background: #ff007f; bottom: -100px; right: -50px; animation-delay: -3s; }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 0.9; }
+        }
+
+        /* Music Bar Control */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(15, 5, 29, 0.75);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #00f0ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .audio-control:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            border-color: #ff007f;
+            color: #ff007f;
+        }
+
+        /* App Page Shell */
+        .page {
+            display: none;
+            width: 90%;
+            max-width: 700px;
+            min-height: 82vh;
+            margin: 30px auto;
+            background: rgba(18, 7, 36, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 35px 25px;
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1);
+            z-index: 10;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .page.active {
+            display: flex;
+            animation: cyberFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cyberFade {
+            from { opacity: 0; transform: scale(0.96) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Neon Headers */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 40px #8a2be2;
+            letter-spacing: 1px;
+        }
+
+        .neon-blue {
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #8a2be2;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #e2d9f3;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* Scroll Area for Multi-Pic Pages */
+        .scroll-container {
+            width: 100%;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-bottom: 20px;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(#00f0ff, #ff007f);
+            border-radius: 10px;
+        }
+
+        /* Image Display Cards */
+        .card {
+            background: rgba(10, 3, 22, 0.8);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 380px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0,240,255,0.2));
+        }
+
+        .final-wrapper {
+            height: 420px;
+            border: 2px solid #00f0ff;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Math Challenge Box */
+        .math-box {
+            background: rgba(10, 3, 22, 0.9);
+            border: 2px solid #00f0ff;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px 0;
+        }
+
+        .math-question {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            color: #ff007f;
+            text-shadow: 0 0 15px #ff007f;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .math-input {
+            width: 120px;
+            padding: 12px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            border-radius: 10px;
+            border: 2px solid #00f0ff;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            outline: none;
+            margin-bottom: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .math-input:focus {
+            border-color: #ff007f;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+        }
+
+        .error-msg {
+            color: #ff4757;
+            font-size: 1.1rem;
+            min-height: 25px;
+            font-weight: 700;
+        }
+
+        /* Cyberpunk Neon Buttons */
+        .btn {
+            background: linear-gradient(135deg, #ff007f 0%, #8a2be2 50%, #00f0ff 100%);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-orb orb-1"></div>
+    <div class="neon-orb orb-2"></div>
+
+    <!-- Music Player Controls -->
+    <button class="audio-control" onclick="toggleAudio()" id="audioBtn">
+        <span id="audioIcon">🎵</span> <span id="audioText">Play Sound</span>
+    </button>
+    
+    <audio id="bgMusic" loop>
+        <source src="didisong.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page 1: Cyber Welcome -->
+    <div class="page active" id="page1">
+        <h1>HAPPY BIRTHDAY DIDI! ✨💜</h1>
+        <p>Step into your cyber birthday space. A special tribute crafted for the coolest sister in the universe!</p>
+        <p>Click below to begin the trip through your best moments... ⚡</p>
+        <button class="btn" onclick="nextPage(2)">ENTER REALM ➔</button>
+    </div>
+
+    <!-- Page 2: Photos 1 & 2 -->
+    <div class="page" id="page2">
+        <h1 class="neon-blue">NEON MEMORIES 01</h1>
+        <div class="scroll-container">
+            <div class="card">
+                <div class="img-wrapper">
+                    <img src="didi1.jpeg" alt="Didi Photo 1">
+                </div>
+                <p>Always serving the absolute best style & energy! 💫</p>
+            </div>
+            <div class="card">
+                <div class="img-wrapper">
+                    <img src="didi2.jpeg" alt="Didi Photo 2">
+                </div>
+                <p>Bringing warmth and sparkle wherever you go. ✨</p>
+            </div>
+        </div>
+        <button class="btn" onclick="nextPage(3)">NEXT MEMORIES ➔</button>
+    </div>
+
+    <!-- Page 3: Photos 3 & 4 -->
+    <div class="page" id="page3">
+        <h1>NEON MEMORIES 02</h1>
+        <div class="scroll-container">
+            <div class="card">
+                <div class="img-wrapper">
+                    <img src="didi3.jpeg" alt="Didi Photo 3">
+                </div>
+                <p>Partner in crime and the best big sister always! 💜</p>
+            </div>
+            <div class="card">
+                <div class="img-wrapper">
+                    <img src="didi4.jpeg" alt="Didi Photo 4">
+                </div>
+                <p>Keep shining brighter than all the neon lights! ⚡</p>
+            </div>
+        </div>
+        <button class="btn" onclick="nextPage(4)">NEXT CHALLENGE ➔</button>
+    </div>
+
+    <!-- Page 4: Math Question Gate with Brackets -->
+    <div class="page" id="page4">
+        <h1 class="neon-blue">SECURITY CHECKPOINT 🔒</h1>
+        <p>Solve this BODMAS puzzle to unlock the final stage!</p>
+        
+        <div class="math-box">
+            <p style="color: #00f0ff; margin-bottom: 10px;">Use brackets carefully, Didi! 😉</p>
+            <div class="math-question">(8 + 2) × [5 - (3 + 1)] = ?</div>
+            <input type="number" id="mathAnswer" class="math-input" placeholder="?" autocomplete="off">
+            <div class="error-msg" id="errorMsg"></div>
+        </div>
+
+        <button class="btn" onclick="checkMathAnswer()">UNLOCK STAGE ➔</button>
+    </div>
+
+    <!-- Page 5: Photo 5 (Grand Finale) -->
+    <div class="page" id="page5">
+        <div class="card" style="width: 100%;">
+            <div class="img-wrapper final-wrapper">
+                <img src="didi5.jpeg" alt="Didi Photo 5">
+            </div>
+        </div>
+        <h1 class="neon-blue">Happy bday didi!!!! 🎉✨💖</h1>
+        <p>May your year ahead be as awesome, colorful, and powerful as you are!</p>
+        <button class="btn" onclick="nextPage(1)">REPLAY ↺</button>
+    </div>
+
+    <script>
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('page' + pageNumber).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function checkMathAnswer() {
+            const answer = document.getElementById('mathAnswer').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // Correct answer is 10: (10) * (5 - 4) = 10 * 1 = 10
+            if (answer === "10") {
+                errorMsg.innerText = "";
+                document.getElementById('mathAnswer').value = "";
+                nextPage(5);
+            } else {
+                errorMsg.innerText = "Not quite! Follow the brackets (BODMAS)! 🤓✨";
+            }
+        }
+
+        // Allow pressing Enter key on math input
+        document.getElementById('mathAnswer').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkMathAnswer();
+            }
+        });
+
+        const music = document.getElementById('bgMusic');
+        const audioBtn = document.getElementById('audioBtn');
+        const audioIcon = document.getElementById('audioIcon');
+        const audioText = document.getElementById('audioText');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                music.pause();
+                audioIcon.innerText = "🔇";
+                audioText.innerText = "Mute";
+                isPlaying = false;
+            } else {
+                music.play().then(() => {
+                    audioIcon.innerText = "🔊";
+                    audioText.innerText = "Playing";
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log("Audio autoplay blocked or file missing:", err);
+                });
+            }
+        }
+
+        document.body.addEventListener('click', function firstClick() {
+            if (!isPlaying) {
+                toggleAudio();
+            }
+            document.body.removeEventListener('click', firstClick);
+        }, { once: true });
+    </script>
+</body>
+</html>
